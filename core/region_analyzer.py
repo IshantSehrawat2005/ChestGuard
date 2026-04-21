@@ -81,23 +81,8 @@ def analyze_regions(img_tensor, img_resized):
         for i, disease in enumerate(disease_names):
             raw_prob = float(raw_probs[i])  # Already [0, 1]
 
-            if op_threshs is not None:
-                thresh = float(op_threshs[i])
-                if thresh <= 0:
-                    thresh = 0.01
-                ratio = raw_prob / thresh
-                if ratio < 0.5:
-                    calibrated = ratio * 10.0
-                elif ratio < 1.0:
-                    calibrated = 5.0 + (ratio - 0.5) * 40.0
-                elif ratio < 2.0:
-                    calibrated = 25.0 + (ratio - 1.0) * 30.0
-                elif ratio < 5.0:
-                    calibrated = 55.0 + ((ratio - 2.0) / 3.0) * 30.0
-                else:
-                    calibrated = 85.0 + min((ratio - 5.0) / 10.0, 1.0) * 14.9
-            else:
-                calibrated = raw_prob * 100.0
+            # Simply convert raw probability [0.0, 1.0] to percentage [0.0, 100.0]
+            calibrated = raw_prob * 100.0
 
             region_findings[disease] = round(min(calibrated, 99.9), 2)
 

@@ -98,21 +98,10 @@ def analyze_xray(image_file):
     max_prob = max(max_prob, 0.01)  # Avoid div by zero
 
     for disease, raw_prob, thresh, is_positive in findings:
-        # Base score: normalize raw probability to a meaningful range
-        # Use the max output as the reference point
-        normalized = raw_prob / max_prob  # 0 to 1 relative to strongest finding
-
-        if is_positive:
-            # Above clinical threshold — this is a detected finding
-            # Score range: 30% to 95% based on normalized strength
-            calibrated = 30.0 + (normalized * 65.0)
-        else:
-            # Below threshold — not a significant finding
-            # Score range: 1% to 25%
-            ratio_to_thresh = raw_prob / thresh
-            calibrated = min(ratio_to_thresh * 15.0, 25.0)
-
-        results[disease] = round(max(calibrated, 0.5), 2)
+        # torchxrayvision returns true probabilities in the range [0.0, 1.0].
+        # We simply convert this to a percentage for accurate display.
+        calibrated = raw_prob * 100.0
+        results[disease] = round(max(calibrated, 0.1), 2)
 
     # Sort by probability (highest first)
     results = dict(sorted(results.items(), key=lambda x: x[1], reverse=True))
