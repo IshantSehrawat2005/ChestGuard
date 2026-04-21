@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChestGuard NeuralScan — AI Chest X-Ray Diagnostic Intelligence</title>
+    <meta name="description"
+        content="ChestGuard NeuralScan: Patent-pending AI-powered chest X-ray diagnostic intelligence platform with GradCAM explainability, multi-agent reasoning, and NeuralScore risk assessment.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫁</text></svg>">
+</head>
+
+<body>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PARTICLE BACKGROUND CANVAS                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TOAST NOTIFICATION CONTAINER               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="toast-container"></div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- NAVIGATION BAR                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <div class="nav-logo">
+                <i class="fas fa-lungs"></i>
+            </div>
+            <span class="nav-title">ChestGuard <span class="accent">NeuralScan</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link active" data-section="hero">Home</a>
+            <a href="#upload-section" class="nav-link" data-section="upload-section">Analyze</a>
+            <a href="#results-section" class="nav-link" data-section="results-section">Results</a>
+            <a href="#history-section" class="nav-link" data-section="history-section">History</a>
+            <button class="nav-btn" id="chat-toggle-btn">
+                <i class="fas fa-comment-dots"></i>
+                <span>AI Chat</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO SECTION                               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-microchip"></i>
+                AI-Powered Diagnostic Intelligence
+            </div>
+            <h1 class="hero-title">
+                ChestGuard
+                <span class="hero-gradient">NeuralScan</span>
+            </h1>
+            <p class="hero-subtitle">
+                Next-generation chest X-ray analysis platform combining deep learning explainability,
+                multi-agent diagnostic reasoning, and composite risk intelligence.
+            </p>
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <div class="hero-feature-icon"><i class="fas fa-brain"></i></div>
+                    <span>GradCAM Explainability</span>
+                </div>
+                <div class="hero-feature">
+                    <div class="hero-feature-icon"><i class="fas fa-robot"></i></div>
+                    <span>4-Agent Pipeline</span>
+                </div>
+                <div class="hero-feature">
+                    <div class="hero-feature-icon"><i class="fas fa-shield-halved"></i></div>
+                    <span>NeuralScore™ Risk</span>
+                </div>
+                <div class="hero-feature">
+                    <div class="hero-feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <span>Temporal Tracking</span>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="#upload-section" class="btn btn-primary btn-lg" id="start-analysis-btn">
+                    <i class="fas fa-microscope"></i>
+                    Start Analysis
+                </a>
+                <a href="#how-it-works" class="btn btn-outline btn-lg">
+                    <i class="fas fa-play-circle"></i>
+                    How It Works
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-count="18">0</span>
+                    <span class="hero-stat-label">Conditions Detected</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-count="4">0</span>
+                    <span class="hero-stat-label">Diagnostic Agents</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-count="6">0</span>
+                    <span class="hero-stat-label">Anatomical Regions</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="lung-animation">
+                <div class="lung-circle lung-circle-1"></div>
+                <div class="lung-circle lung-circle-2"></div>
+                <div class="lung-circle lung-circle-3"></div>
+                <div class="lung-icon"><i class="fas fa-lungs"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HOW IT WORKS                               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="how-it-works" id="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Our patent-pending multi-stage diagnostic pipeline</p>
+        <div class="pipeline-steps">
+            <div class="pipeline-step" data-step="1">
+                <div class="step-number">01</div>
+                <div class="step-icon"><i class="fas fa-upload"></i></div>
+                <h3>Upload X-Ray</h3>
+                <p>Drag & drop your chest X-ray image with patient information</p>
+            </div>
+            <div class="pipeline-connector"><i class="fas fa-chevron-right"></i></div>
+            <div class="pipeline-step" data-step="2">
+                <div class="step-number">02</div>
+                <div class="step-icon"><i class="fas fa-brain"></i></div>
+                <h3>DenseNet-121 Analysis</h3>
+                <p>Deep learning model screens for 18 chest pathologies with GradCAM heatmaps</p>
+            </div>
+            <div class="pipeline-connector"><i class="fas fa-chevron-right"></i></div>
+            <div class="pipeline-step" data-step="3">
+                <div class="step-number">03</div>
+                <div class="step-icon"><i class="fas fa-robot"></i></div>
+                <h3>4-Agent AI Pipeline</h3>
+                <p>Screening → Correlation → Risk → Recommendation agents analyze sequentially</p>
+            </div>
+            <div class="pipeline-connector"><i class="fas fa-chevron-right"></i></div>
+            <div class="pipeline-step" data-step="4">
+                <div class="step-number">04</div>
+                <div class="step-icon"><i class="fas fa-file-medical"></i></div>
+                <h3>Intelligence Report</h3>
+                <p>Interactive dashboard with NeuralScore™, heatmaps, regions & PDF export</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- UPLOAD SECTION                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="upload-section" id="upload-section">
+        <h2 class="section-title">Analyze Your X-Ray</h2>
+        <p class="section-subtitle">Upload a chest X-ray and provide patient information for comprehensive analysis</p>
+
+        <div class="upload-grid">
+            <!-- Upload Area -->
+            <div class="upload-card glass-card">
+                <h3 class="card-title"><i class="fas fa-cloud-upload-alt"></i> X-Ray Image</h3>
+                <div class="drop-zone" id="drop-zone">
+                    <div class="drop-zone-content" id="drop-zone-content">
+                        <div class="drop-icon">
+                            <i class="fas fa-x-ray"></i>
+                        </div>
+                        <p class="drop-text">Drag & drop your chest X-ray here</p>
+                        <p class="drop-subtext">or click to browse • JPG, PNG, BMP • Max 16MB</p>
+                        <button class="btn btn-outline btn-sm" id="browse-btn">
+                            <i class="fas fa-folder-open"></i> Browse Files
+                        </button>
+                    </div>
+                    <div class="drop-zone-preview" id="drop-zone-preview" style="display:none;">
+                        <img id="preview-image" src="" alt="X-Ray Preview">
+                        <button class="btn-remove-image" id="remove-image-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="preview-filename" id="preview-filename"></div>
+                    </div>
+                    <input type="file" id="file-input" accept=".jpg,.jpeg,.png,.bmp" hidden>
+                </div>
+            </div>
+
+            <!-- Patient Info -->
+            <div class="patient-card glass-card">
+                <h3 class="card-title"><i class="fas fa-user-md"></i> Patient Information</h3>
+                <form id="patient-form">
+                    <div class="form-group">
+                        <label for="patient-name">Patient Name</label>
+                        <input type="text" id="patient-name" placeholder="e.g., John Doe" class="form-input">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="patient-age">Age</label>
+                            <input type="number" id="patient-age" min="1" max="120" value="30" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="patient-gender">Gender</label>
+                            <select id="patient-gender" class="form-input">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Symptoms</label>
+                        <div class="symptom-chips">
+                            <label class="chip"><input type="checkbox" value="Cough"> <span>🤧 Cough</span></label>
+                            <label class="chip"><input type="checkbox" value="Fever"> <span>🤒 Fever</span></label>
+                            <label class="chip"><input type="checkbox" value="Difficulty Breathing"> <span>😮‍💨
+                                    Breathing</span></label>
+                            <label class="chip"><input type="checkbox" value="Chest Pain"> <span>💔 Chest
+                                    Pain</span></label>
+                            <label class="chip"><input type="checkbox" value="Fatigue"> <span>😴 Fatigue</span></label>
+                            <label class="chip"><input type="checkbox" value="Weight Loss"> <span>⚖️ Weight
+                                    Loss</span></label>
+                        </div>
+                        <input type="text" id="other-symptoms" placeholder="Other symptoms..." class="form-input"
+                            style="margin-top:8px;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="smoking-history">Smoking History</label>
+                        <select id="smoking-history" class="form-input">
+                            <option value="Never">Never</option>
+                            <option value="Former Smoker">Former Smoker</option>
+                            <option value="Current Smoker">Current Smoker</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="conditions">Pre-existing Conditions</label>
+                        <input type="text" id="conditions" placeholder="e.g., Diabetes, Hypertension"
+                            class="form-input">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Analyze Button -->
+        <div class="analyze-btn-container">
+            <button class="btn btn-primary btn-xl analyze-btn" id="analyze-btn" disabled>
+                <i class="fas fa-microscope"></i>
+                <span>Run NeuralScan Analysis</span>
+            </button>
+            <p class="analyze-hint" id="analyze-hint">Upload an X-ray image to begin</p>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="analysis-loader" id="analysis-loader" style="display:none;">
+            <div class="loader-card glass-card">
+                <div class="loader-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-icon"><i class="fas fa-brain"></i></div>
+                </div>
+                <h3 class="loader-title" id="loader-title">Initializing NeuralScan...</h3>
+                <div class="loader-steps">
+                    <div class="loader-step" id="step-model" data-step="1">
+                        <div class="step-indicator"><i class="fas fa-circle-notch fa-spin"></i></div>
+                        <span>Running DenseNet-121 deep learning model</span>
+                    </div>
+                    <div class="loader-step" id="step-gradcam" data-step="2">
+                        <div class="step-indicator"><i class="fas fa-circle"></i></div>
+                        <span>Generating GradCAM explainability heatmaps</span>
+                    </div>
+                    <div class="loader-step" id="step-regions" data-step="3">
+                        <div class="step-indicator"><i class="fas fa-circle"></i></div>
+                        <span>Analyzing anatomical regions</span>
+                    </div>
+                    <div class="loader-step" id="step-risk" data-step="4">
+                        <div class="step-indicator"><i class="fas fa-circle"></i></div>
+                        <span>Computing NeuralScore™ risk assessment</span>
+                    </div>
+                    <div class="loader-step" id="step-agents" data-step="5">
+                        <div class="step-indicator"><i class="fas fa-circle"></i></div>
+                        <span>Running 4-agent diagnostic pipeline</span>
+                    </div>
+                </div>
+                <div class="loader-progress">
+                    <div class="loader-progress-bar" id="loader-progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- RESULTS DASHBOARD                          -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="results-section" id="results-section" style="display:none;">
+        <h2 class="section-title">Diagnostic Intelligence Report</h2>
+
+        <!-- Quick Stats Bar -->
+        <div class="quick-stats" id="quick-stats">
+            <div class="stat-card glass-card" id="stat-neuralscore">
+                <div class="stat-icon"><i class="fas fa-shield-halved"></i></div>
+                <div class="stat-value" id="stat-score-value">--</div>
+                <div class="stat-label">NeuralScore™</div>
+            </div>
+            <div class="stat-card glass-card" id="stat-severity">
+                <div class="stat-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                <div class="stat-value" id="stat-severity-value">--</div>
+                <div class="stat-label">Risk Tier</div>
+            </div>
+            <div class="stat-card glass-card" id="stat-conditions">
+                <div class="stat-icon"><i class="fas fa-stethoscope"></i></div>
+                <div class="stat-value" id="stat-conditions-value">--</div>
+                <div class="stat-label">Conditions Found</div>
+            </div>
+            <div class="stat-card glass-card" id="stat-scans">
+                <div class="stat-icon"><i class="fas fa-clock-rotate-left"></i></div>
+                <div class="stat-value" id="stat-scans-value">1</div>
+                <div class="stat-label">Scans Tracked</div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav" id="tab-nav">
+            <button class="tab-btn active" data-tab="overview"><i class="fas fa-chart-pie"></i> Overview</button>
+            <button class="tab-btn" data-tab="heatmaps"><i class="fas fa-fire"></i> Heatmaps</button>
+            <button class="tab-btn" data-tab="regions"><i class="fas fa-th-large"></i> Regions</button>
+            <button class="tab-btn" data-tab="agents"><i class="fas fa-robot"></i> AI Reasoning</button>
+            <button class="tab-btn" data-tab="risk"><i class="fas fa-shield-halved"></i> Risk Profile</button>
+            <button class="tab-btn" data-tab="timeline"><i class="fas fa-timeline"></i> Timeline</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- OVERVIEW TAB -->
+            <div class="tab-pane active" id="tab-overview">
+                <div class="overview-grid">
+                    <div class="overview-left">
+                        <div class="glass-card">
+                            <h3 class="card-title"><i class="fas fa-chart-bar"></i> Top Findings</h3>
+                            <div id="findings-bars"></div>
+                        </div>
+                        <div class="glass-card">
+                            <h3 class="card-title"><i class="fas fa-list-check"></i> All 18 Conditions</h3>
+                            <div class="all-conditions-grid" id="all-conditions-grid"></div>
+                        </div>
+                    </div>
+                    <div class="overview-right">
+                        <div class="glass-card neural-score-card">
+                            <h3 class="card-title"><i class="fas fa-gauge-high"></i> NeuralScore™</h3>
+                            <div class="gauge-container">
+                                <canvas id="neural-gauge" width="260" height="180"></canvas>
+                                <div class="gauge-score" id="gauge-score">--</div>
+                                <div class="gauge-label" id="gauge-label">Computing...</div>
+                            </div>
+                            <div class="gauge-action" id="gauge-action"></div>
+                        </div>
+                        <div class="glass-card">
+                            <h3 class="card-title"><i class="fas fa-x-ray"></i> X-Ray Preview</h3>
+                            <div class="xray-preview-container">
+                                <img id="result-xray-preview" src="" alt="X-Ray">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HEATMAPS TAB -->
+            <div class="tab-pane" id="tab-heatmaps">
+                <div class="heatmap-layout">
+                    <div class="heatmap-viewer glass-card">
+                        <h3 class="card-title"><i class="fas fa-eye"></i> AI Focus Visualization</h3>
+                        <div class="viewer-container">
+                            <div class="xray-viewer" id="xray-viewer">
+                                <img id="heatmap-base-image" src="" alt="X-Ray Base">
+                                <img id="heatmap-overlay-image" src="" alt="Heatmap Overlay" class="heatmap-overlay">
+                            </div>
+                            <div class="viewer-controls">
+                                <label class="control-label">Heatmap Opacity</label>
+                                <input type="range" id="heatmap-opacity" min="0" max="100" value="50"
+                                    class="range-slider">
+                                <span id="opacity-value">50%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heatmap-selector glass-card">
+                        <h3 class="card-title"><i class="fas fa-layer-group"></i> Condition Layers</h3>
+                        <p class="card-subtitle">Select a condition to view where the AI focused</p>
+                        <div id="heatmap-buttons"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REGIONS TAB -->
+            <div class="tab-pane" id="tab-regions">
+                <div class="regions-layout">
+                    <div class="region-viewer glass-card">
+                        <h3 class="card-title"><i class="fas fa-draw-polygon"></i> Anatomical Regions</h3>
+                        <div class="region-xray-container">
+                            <img id="region-xray-image" src="" alt="X-Ray">
+                            <svg id="region-overlay-svg" class="region-overlay-svg"></svg>
+                        </div>
+                    </div>
+                    <div class="region-details glass-card">
+                        <h3 class="card-title"><i class="fas fa-clipboard-list"></i> Regional Findings</h3>
+                        <div id="region-cards"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AGENTS TAB -->
+            <div class="tab-pane" id="tab-agents">
+                <div class="agents-pipeline">
+                    <h3 class="pipeline-title"><i class="fas fa-sitemap"></i> Multi-Agent Diagnostic Chain</h3>
+                    <p class="pipeline-subtitle">Each AI agent analyzes sequentially, building on previous findings</p>
+                    <div class="agents-chain" id="agents-chain"></div>
+                </div>
+            </div>
+
+            <!-- RISK TAB -->
+            <div class="tab-pane" id="tab-risk">
+                <div class="risk-layout">
+                    <div class="risk-chart-card glass-card">
+                        <h3 class="card-title"><i class="fas fa-chart-radar"></i> Risk Factor Breakdown</h3>
+                        <div class="chart-container">
+                            <canvas id="risk-radar-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="risk-details-card glass-card">
+                        <h3 class="card-title"><i class="fas fa-bars-progress"></i> Factor Analysis</h3>
+                        <div id="risk-factors-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIMELINE TAB -->
+            <div class="tab-pane" id="tab-timeline">
+                <div class="timeline-layout">
+                    <div class="timeline-chart-card glass-card">
+                        <h3 class="card-title"><i class="fas fa-chart-line"></i> Progression Over Time</h3>
+                        <div id="timeline-content">
+                            <div class="timeline-empty">
+                                <i class="fas fa-clock-rotate-left"></i>
+                                <p>Upload multiple X-rays to track changes over time.</p>
+                                <p class="hint">Each analysis is automatically added to your timeline.</p>
+                                <a href="#upload-section" class="btn btn-outline btn-sm">
+                                    <i class="fas fa-plus"></i> Add Another Scan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-alerts-card glass-card">
+                        <h3 class="card-title"><i class="fas fa-bell"></i> Progression Alerts</h3>
+                        <div id="timeline-alerts">
+                            <p class="empty-text">No progression alerts yet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="action-bar">
+            <button class="btn btn-primary" id="download-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Download PDF Report
+            </button>
+            <button class="btn btn-outline" id="new-scan-btn">
+                <i class="fas fa-plus-circle"></i> New Scan
+            </button>
+            <button class="btn btn-outline" id="add-to-timeline-btn">
+                <i class="fas fa-timeline"></i> Add to Timeline
+            </button>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PATIENT HISTORY SECTION                    -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="history-section" id="history-section">
+        <h2 class="section-title">Patient History</h2>
+        <p class="section-subtitle">All patient records and scan data stored locally on your system</p>
+
+        <!-- Dashboard Stats -->
+        <div class="quick-stats history-stats" id="history-stats">
+            <div class="stat-card glass-card">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-value" id="hist-total-patients">--</div>
+                <div class="stat-label">Total Patients</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon"><i class="fas fa-x-ray"></i></div>
+                <div class="stat-value" id="hist-total-scans">--</div>
+                <div class="stat-label">Total Scans</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon"><i class="fas fa-gauge-high"></i></div>
+                <div class="stat-value" id="hist-avg-score">--</div>
+                <div class="stat-label">Avg NeuralScore™</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon"><i class="fas fa-database"></i></div>
+                <div class="stat-value"><i class="fas fa-check-circle" style="color:var(--success)"></i></div>
+                <div class="stat-label">Local SQLite Storage</div>
+            </div>
+        </div>
+
+        <!-- Patients Table -->
+        <div class="glass-card" style="margin-top:24px;">
+            <div class="card-title" style="justify-content:space-between;">
+                <span><i class="fas fa-folder-open"></i> Patient Records</span>
+                <button class="btn btn-outline btn-sm" id="refresh-history-btn">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+            <div class="history-table-container">
+                <table class="history-table" id="history-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Patient Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Symptoms</th>
+                            <th>Scans</th>
+                            <th>Last Scan</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table-body">
+                        <tr>
+                            <td colspan="8" class="empty-text">Loading patient records...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Scan Detail Modal (inline) -->
+        <div class="scan-detail-panel glass-card" id="scan-detail-panel" style="display:none; margin-top:24px;">
+            <div class="card-title" style="justify-content:space-between;">
+                <span><i class="fas fa-file-medical-alt"></i> Scan Details</span>
+                <button class="btn btn-outline btn-sm" id="close-scan-detail"><i class="fas fa-times"></i>
+                    Close</button>
+            </div>
+            <div id="scan-detail-content"></div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- DISCLAIMER                                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="disclaimer-section" id="disclaimer">
+        <div class="disclaimer-card glass-card">
+            <i class="fas fa-exclamation-triangle disclaimer-icon"></i>
+            <h3>Medical Disclaimer</h3>
+            <p>
+                ChestGuard NeuralScan is an AI-assisted screening tool for <strong>educational and research purposes
+                    only</strong>.
+                It is <strong>NOT</strong> a substitute for professional medical advice, diagnosis, or treatment.
+                The NeuralScore™, risk assessments, and AI-generated recommendations should always be validated by a
+                qualified healthcare professional.
+                Never make medical decisions based solely on AI screening results.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FOOTER                                     -->
+    <!-- ═══════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <i class="fas fa-lungs"></i>
+                <span>ChestGuard NeuralScan</span>
+            </div>
+            <div class="footer-tech">
+                <span>Built with</span>
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">DenseNet-121</span>
+                <span class="tech-tag">GradCAM</span>
+                <span class="tech-tag">LangChain</span>
+                <span class="tech-tag">Groq LLM</span>
+                <span class="tech-tag">Flask</span>
+            </div>
+            <p class="footer-copy">© 2026 ChestGuard NeuralScan. All rights reserved. Patent Pending.</p>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CHAT PANEL (Slide-in)                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="chat-panel" id="chat-panel">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar"><i class="fas fa-robot"></i></div>
+                <div>
+                    <h4>NeuralScan AI</h4>
+                    <span class="chat-status" id="chat-status">Ready</span>
+                </div>
+            </div>
+            <button class="chat-close-btn" id="chat-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-msg ai">
+                <div class="chat-msg-avatar"><i class="fas fa-robot"></i></div>
+                <div class="chat-msg-content">
+                    <p>Hello! I'm your NeuralScan AI assistant. Upload and analyze an X-ray, then ask me any questions
+                        about the results. I have full context of the analysis.</p>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Ask about your X-ray results..." class="chat-input"
+                disabled>
+            <button class="chat-send-btn" id="chat-send-btn" disabled>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Chat FAB -->
+    <button class="chat-fab" id="chat-fab" title="Chat with AI">
+        <i class="fas fa-comment-dots"></i>
+        <span class="chat-fab-badge" id="chat-fab-badge" style="display:none;"></span>
+    </button>
+
+    <!-- Scripts -->
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/xray-viewer.js"></script>
+    <script src="/static/js/charts.js"></script>
+    <script src="/static/js/chat.js"></script>
+    <script src="/static/js/timeline.js"></script>
+    <script src="/static/js/history.js"></script>
+</body>
+
+</html>

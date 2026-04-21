@@ -1,0 +1,33 @@
+======================================================================
+RAW MODEL OUTPUT ANALYSIS
+======================================================================
+
+Raw output range: [0.0063, 0.6136]
+Raw output mean:  0.3755
+Raw output std:   0.1937
+
+Pathology                                Raw  Sigmoid
+-------------------------------------------------------
+Atelectasis                           0.0790   51.97%
+Consolidation                         0.5032   62.32%
+Infiltration                          0.5319   62.99%
+Pneumothorax                          0.5295   62.94%
+Edema                                 0.3615   58.94%
+Emphysema                             0.5010   62.27%
+Fibrosis                              0.5046   62.36%
+Effusion                              0.1979   54.93%
+Pneumonia                             0.1807   54.50%
+Pleural_Thickening                    0.4541   61.16%
+Cardiomegaly                          0.1644   54.10%
+Nodule                                0.5004   62.25%
+Mass                                  0.5026   62.31%
+Hernia                                0.0063   50.16%
+Lung Lesion                           0.0651   51.63%
+Fracture                              0.5140   62.57%
+Lung Opacity                          0.6136   64.88%
+Enlarged Cardiomediastinum            0.5486   63.38%
+
+
+Model has op_threshs: True
+op_threshs: tensor([0.0742, 0.0383, 0.0981, 0.0098, 0.0236, 0.0022, 0.0101, 0.1032, 0.0568,
+        0.0268, 0.0503, 0.0240, 0.0194, 0.0429, 0.0534, 0.0360, 0.2020, 0.0502])
